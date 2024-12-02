@@ -1,0 +1,108 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+struct Node* createNode(int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+    return newNode;
+}
+struct Node* createLinkedList(int data[], int size) {
+    if (size == 0) return NULL;
+    struct Node* head = createNode(data[0]);
+    struct Node* current = head;
+    for (int i = 1; i < size; i++) {
+        current->next = createNode(data[i]);
+        current = current->next;
+    }
+    return head;
+}
+struct Node* deleteFirst(struct Node* head) {
+    if (head == NULL) {
+        printf("List is empty!\n");
+        return NULL;
+    }
+    struct Node* temp = head;
+    head = head->next;
+    free(temp);
+    return head;
+}
+struct Node* deleteSpecified(struct Node* head, int value) {
+    if (head == NULL) {
+        printf("List is empty!\n");
+        return NULL;
+    }
+    if (head->data == value) {
+        struct Node* temp = head;
+        head = head->next;
+        free(temp);
+        return head;
+    }
+    struct Node* current = head;
+    while (current->next != NULL && current->next->data != value) {
+        current = current->next;
+    }
+    if (current->next == NULL) {
+        printf("Value %d not found in the list!\n", value);
+    } else {
+        struct Node* temp = current->next;
+        current->next = current->next->next;
+        free(temp);
+    }
+    return head;
+}
+struct Node* deleteLast(struct Node* head) {
+    if (head == NULL) {
+        printf("List is empty!\n");
+        return NULL;
+    }
+    if (head->next == NULL) {
+        free(head);
+        return NULL;
+    }
+    struct Node* current = head;
+    while (current->next->next != NULL) {
+        current = current->next;
+    }
+    free(current->next);
+    current->next = NULL;
+    return head;
+}
+void display(struct Node* head) {
+    if (head == NULL) {
+        printf("List is empty!\n");
+        return;
+    }
+    struct Node* current = head;
+    while (current != NULL) {
+        printf("%d -> ", current->data);
+        current = current->next;
+    }
+    printf("NULL\n");
+}
+int main() {
+    int data[] = {10, 20, 30, 40};
+    struct Node* head = createLinkedList(data, 4);
+
+    printf("Original list:\n");
+    display(head);
+
+    printf("\nDeleting the first element:\n");
+    head = deleteFirst(head);
+    display(head);
+
+    printf("\nDeleting the specified element (30):\n");
+    head = deleteSpecified(head, 30);
+    display(head);
+
+    printf("\nDeleting the last element:\n");
+    head = deleteLast(head);
+    display(head);
+
+    return 0;
+}
