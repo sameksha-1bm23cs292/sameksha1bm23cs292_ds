@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX 100 // Maximum number of vertices in the graph
+
+// DFS function
+void DFS(int graph[MAX][MAX], int vertex, int visited[], int numVertices) {
+    visited[vertex] = 1;
+    printf("%d ", vertex);
+
+    for (int i = 0; i < numVertices; i++) {
+        if (graph[vertex][i] == 1 && !visited[i]) {
+            DFS(graph, i, visited, numVertices);
+        }
+    }
+}
+
+// Main function
+int main() {
+    int graph[MAX][MAX], numVertices, startVertex;
+    int visited[MAX] = {0}; // Visited array to keep track of visited vertices
+
+    printf("Enter the number of vertices: ");
+    scanf("%d", &numVertices);
+
+    printf("Enter the adjacency matrix:\n");
+    for (int i = 0; i < numVertices; i++) {
+        for (int j = 0; j < numVertices; j++) {
+            scanf("%d", &graph[i][j]);
+        }
+    }
+
+    printf("Enter the starting vertex: ");
+    scanf("%d", &startVertex);
+
+    printf("DFS Traversal: ");
+    DFS(graph, startVertex, visited, numVertices);
+    printf("\n");
+
+    return 0;
+}
