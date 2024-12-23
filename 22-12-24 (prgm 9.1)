@@ -1,9 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MAX 100 // Maximum number of vertices in the graph
-
-// DFS function
+#define MAX 100 
 void DFS(int graph[MAX][MAX], int vertex, int visited[], int numVertices) {
     visited[vertex] = 1;
     printf("%d ", vertex);
@@ -15,11 +13,9 @@ void DFS(int graph[MAX][MAX], int vertex, int visited[], int numVertices) {
     }
 }
 
-// Main function
 int main() {
     int graph[MAX][MAX], numVertices, startVertex;
-    int visited[MAX] = {0}; // Visited array to keep track of visited vertices
-
+    int visited[MAX] = {0}; 
     printf("Enter the number of vertices: ");
     scanf("%d", &numVertices);
 
