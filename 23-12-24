@@ -1,14 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-// Structure for a node in the binary search tree
 struct Node {
     int data;
     struct Node* left;
     struct Node* right;
 };
 
-// Function to create a new node
 struct Node* createNode(int data) {
     struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
     newNode->data = data;
@@ -17,7 +14,6 @@ struct Node* createNode(int data) {
     return newNode;
 }
 
-// Function to insert a node into the BST
 struct Node* insert(struct Node* root, int data) {
     if (root == NULL) {
         return createNode(data);
@@ -29,8 +25,7 @@ struct Node* insert(struct Node* root, int data) {
     }
     return root;
 }
-
-// In-order traversal
+                                                                                                                                                                                     
 void inorder(struct Node* root) {
     if (root != NULL) {
         inorder(root->left);
@@ -38,8 +33,6 @@ void inorder(struct Node* root) {
         inorder(root->right);
     }
 }
-
-// Pre-order traversal
 void preorder(struct Node* root) {
     if (root != NULL) {
         printf("%d ", root->data);
@@ -48,7 +41,6 @@ void preorder(struct Node* root) {
     }
 }
 
-// Post-order traversal
 void postorder(struct Node* root) {
     if (root != NULL) {
         postorder(root->left);
@@ -56,8 +48,7 @@ void postorder(struct Node* root) {
         printf("%d ", root->data);
     }
 }
-
-// Main function
+      
 int main() {
     struct Node* root = NULL;
     int choice, value;
